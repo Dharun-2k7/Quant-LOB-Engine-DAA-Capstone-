@@ -1,0 +1,20 @@
+# ---- CMake build artifacts ----
+CMakeLists.txt
+build/
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+compile_commands.json
+
+# ---- Compiled outputs ----
+*.o
+*.a
+*.so
+*.out
+lob_sim
+
+# ---- IDE / editor ----
+.vscode/
+.idea/
+
