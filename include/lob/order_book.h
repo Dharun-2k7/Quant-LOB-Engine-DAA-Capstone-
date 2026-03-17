@@ -46,6 +46,10 @@ class OrderBook {
   const std::vector<Trade>& trades() const { return trades_; }
   std::size_t live_orders() const { return live_orders_; }
 
+  // For dashboards/analytics: aggregated price levels near top-of-book.
+  // Returns (price, total_qty) pairs.
+  std::vector<std::pair<Price, long long>> top_levels(Side side, std::size_t depth) const;
+
  private:
   std::map<Price, Level> bids_;
   std::map<Price, Level> asks_;

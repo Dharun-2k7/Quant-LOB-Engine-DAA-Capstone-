@@ -21,6 +21,26 @@ Price OrderBook::best_ask_price() const {
   return asks_.begin()->first;
 }
 
+std::vector<std::pair<Price, long long>> OrderBook::top_levels(Side side, std::size_t depth) const {
+  std::vector<std::pair<Price, long long>> out;
+  out.reserve(depth);
+
+  if (depth == 0) return out;
+
+  if (side == Side::Buy) {
+    // best -> worst
+    for (auto it = bids_.rbegin(); it != bids_.rend() && out.size() < depth; ++it) {
+      out.push_back({it->first, it->second.total_qty});
+    }
+  } else {
+    // best -> worst
+    for (auto it = asks_.begin(); it != asks_.end() && out.size() < depth; ++it) {
+      out.push_back({it->first, it->second.total_qty});
+    }
+  }
+  return out;
+}
+
 void OrderBook::level_push(Level& lvl, int idx) {
   orders_[idx].prev = lvl.tail;
   orders_[idx].next = -1;
